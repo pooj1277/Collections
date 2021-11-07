@@ -95,4 +95,29 @@ public class MasterBook {
 			entry.getValue().searchContactByState(stateName);
 		}
 	}
+	
+	public void viewCountOfContactsFromSpecificCityName() {
+		long totalCount = 0;
+		long count = 0;
+		System.out.println("Enter the name of the City : ");
+		String cityName = scanner.nextLine();
+		for (Map.Entry<String, AddressBook> entry : masterBook.entrySet()) {
+			count = entry.getValue().viewCountOfContactsFromSpecificCity(cityName);
+			totalCount += count;
+		}
+		System.out.println("Total contacts from " + cityName + " city is " + totalCount);
+	}
+	
+	public void viewCountOfContactFromSpecificStateName() {
+		long totalCount = 0;
+		long count = 0;
+		System.out.println("Enter the name of the State : ");
+		String stateName = scanner.nextLine();
+		for (Map.Entry<String, AddressBook> entry : masterBook.entrySet()) {
+			count = entry.getValue().viewCountOfContactsFromSpecificCity(stateName);
+			totalCount += count;
+		}
+		System.out.println("Total contacts from " + stateName + " state is " + totalCount);
+	
+	}
 }
