@@ -31,7 +31,12 @@ public class MasterBook {
 			case 3:
 				addContactsInAddressBook();
 				break;
-			case 4:
+			case 4: 
+				searchContactsByCityName();
+				break;
+			case 5: 
+				searchContactByStateName();
+			case 6:
 				option = true;
 			}
 		}
@@ -43,13 +48,26 @@ public class MasterBook {
 		System.out.println("\t 1. Print Menu Again.");
 		System.out.println("\t 2. Add New Address Book to the Master Book");
 		System.out.println("\t 3. Add contact in the Existing Address Book");
-		System.out.println("\t 4. Exit");
+		System.out.println("\t 4. Search contact via city name : ");
+		System.out.println("\t 5. Search contact via state name : ");
+		System.out.println("\t 6. Exit");
 	}
 
 	public void addAddressBook() {
 		System.out.println("Enter the Name of the City for which you want to add Address Book: ");
 		String cityName = scanner.nextLine();
 		masterBook.put(cityName, new AddressBook());
+		System.out.println("Address Book Added : ");
+		System.out.println("Would You like to add contact in this Address Book : ");
+		System.out.println("1 Add contact in this Address Book : ");
+		System.out.println("2 Main menu : ");
+		int choice = scanner.nextInt();
+		scanner.nextLine();
+		if (choice == 1) {
+			masterBook.get(cityName).mainMenuAddressBook();
+		} else {
+			mainMenuMasterBook();
+		}
 	}
 
 	public void addContactsInAddressBook() {
@@ -59,6 +77,22 @@ public class MasterBook {
 			System.out.println("Address Book Not Exist. Create new Address Book.");
 		} else {
 			masterBook.get(addressBookName).mainMenuAddressBook();
+		}
+	}
+	
+	public void searchContactsByCityName() {
+		System.out.println("Enter the name of the city : ");
+		String cityName = scanner.nextLine();
+		for (Map.Entry<String, AddressBook> entry : masterBook.entrySet()) {
+			entry.getValue().searchContactByCity(cityName);
+		}
+	}
+	
+	public void searchContactByStateName() {
+		System.out.println("Enter the name of State : ");
+		String stateName = scanner.nextLine();
+		for(Map.Entry<String, AddressBook> entry : masterBook.entrySet()) {
+			entry.getValue().searchContactByState(stateName);
 		}
 	}
 }
